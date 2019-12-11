@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<body>
+    <script>
+    let wins = 0;  
+    let losses = 0;  
+    function computerPlay() {
+        let choices =["Rock", "Paper", "Scissors"];
+        let randomchoice = Math.floor(Math.random()*3);
+        return choices[randomchoice];
+    }
+    function playRPS(playerSelection, computerSelection) {
+        if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+            return "It's a tie";
+        } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "Paper"){
+            losses++;
+            return "You Lose! Paper beats Rock";
+        } else if (playerSelection.toLowerCase()==="paper" && computerSelection ==="Rock"){
+            wins++;
+            return "You Win! Paper beats Rock";
+        } else if (playerSelection.toLowerCase()==="paper" && computerSelection ==="Scissors"){
+            losses++;
+            return "You Lose! Scissors beats Paper";
+        } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "Scissors") {
+            wins++;
+            return "You Win! Rock beats Scissors";
+        } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "Rock") {
+            losses++;
+            return "You Lose! Rock beats Scissors";
+        } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "Paper") {
+            wins++;
+            return "You Win! Scissors beats Paper";
+        }
+        
+        }
+    function game(){
+        let choice = prompt("Choice?");
+        let score = playRPS(choice,computerPlay());
+        return score;
+    }
+    function findwinner(wins, losses){
+        if (wins>losses) {
+            return "You won"
+        } else if (wins < losses) {
+            return "You lose"
+        } else {
+            return "Its a tie"
+        }
+    }
+    </script>
+</body>
