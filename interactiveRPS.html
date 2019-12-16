@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+    <style>
+    .buttons > div {display: inline-block}
+    </style>
+</head>
+
+<body>
+  <div class="buttons">
+    <div id="rock">
+        <button id="rockbtn">Rock!</button>
+    </div>
+    <div id="paper">
+        <button id="paperbtn">Paper!</button>
+    </div>
+    <div id="scissors">
+        <button id="scissorbtn">Scissors!</button>
+    </div>
+  </div> 
+  <div class = "results">
+    <p id="result"></p>
+    <p id="score"></p>
+  </div> 
+</body>
+
+<script>
+    let wins = 0;  
+    let losses = 0;  
+    function computerPlay() {
+        let choices =["Rock", "Paper", "Scissors"];
+        let randomchoice = Math.floor(Math.random()*3);
+        return choices[randomchoice];
+    }
+    function playRPS(playerSelection, computerSelection = computerPlay()) {
+        if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+            return "It's a tie";
+        } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "Paper"){
+            losses++;
+            return "You Lose! Paper beats Rock";
+        } else if (playerSelection.toLowerCase()==="paper" && computerSelection ==="Rock"){
+            wins++;
+            return "You Win! Paper beats Rock";
+        } else if (playerSelection.toLowerCase()==="paper" && computerSelection ==="Scissors"){
+            losses++;
+            return "You Lose! Scissors beats Paper";
+        } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "Scissors") {
+            wins++;
+            return "You Win! Rock beats Scissors";
+        } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "Rock") {
+            losses++;
+            return "You Lose! Rock beats Scissors";
+        } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "Paper") {
+            wins++;
+            return "You Win! Scissors beats Paper";
+        }
+        
+        }
+    function game(){
+        let choice = prompt("Choice?");
+        let score = playRPS(choice,computerPlay());
+        return score;
+    }
+    function findwinner(win, loss){
+        if (win>loss) {
+            wins = 0;
+            losses = 0;
+            return "You won"
+        } else if (win < loss) {
+            wins = 0;
+            losses = 0;
+            return "You lose"
+        } else {
+            return "In all these matches, its a tie"
+            wins = 0;
+            losses = 0;
+        }
+    }
+    const results = document.getElementById("result");
+    const score = document.getElementById("score");
+    const playrock = document.querySelector('#rockbtn');
+    const playpaper = document.querySelector('#paperbtn');
+    const playscissors = document.querySelector('#scissorbtn');
+    playrock.addEventListener('click', () => {results.textContent = playRPS("rock");
+    score.textContent = "wins: " + wins +" losses: "+ losses;
+    if (wins === 5 || losses === 5){results.textContent = findwinner(wins, losses)}
+    })
+    playpaper.addEventListener('click', () => {results.textContent = playRPS("paper")})
+    playscissors.addEventListener('click', () => {results.textContent = playRPS("scissors")})
+    
+    
+    </script>
